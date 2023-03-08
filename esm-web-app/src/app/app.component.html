@@ -1,0 +1,17 @@
+<mat-sidenav-container class="esm-container">
+    <mat-sidenav class="esm-sidenav" #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
+        <img class="esm-user-img" src="assets/empty_user.png" />
+        <p class="esm-username">Admin</p>
+        <mat-nav-list class="esm-list">
+            <mat-list-item *ngFor="let item of listItems" >
+                <mat-icon matListIcon>{{item.icon}}</mat-icon>
+                <a [routerLink]="item.link" routerLinkActive="active" matLine>{{item.linkTitle}}</a>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar class="esm-header">  <a (click)="sidenav.toggle()"><mat-icon class="material-icons-round esm-menu">menu_open</mat-icon></a> Employee Salary Management </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,20 @@
+
+<div class="esm-upload-container">
+    <span class="esm-header">
+        <h2>Upload User Data</h2>
+        <mat-divider class="esm-divider"></mat-divider>
+    </span>
+    <span class="esm-file-upload">
+        <!-- <input class="form-control" type="file" (change)="onFileSelect($event)">
+        <button (click)="onFileUpload()" class="btn btn-success">Upload</button> -->
+        <div class="esm_file_upload">
+            <input type="file" id="fileUpload" (change)="onFileSelect($event)">
+          </div>
+         <div class="esm-btn"><button (click)="onFileUpload()" class="esm-upload-btn">Upload Data</button> </div> 
+    </span>
+      
+    <span class="esm-progress-bar" *ngIf="loading">
+        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+    </span>
+    
+</div>

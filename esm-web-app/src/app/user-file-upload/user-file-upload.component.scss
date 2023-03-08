@@ -1,0 +1,64 @@
+.esm-upload-container {
+    padding: 2em;
+}
+
+.esm-header {
+    padding: 1em;
+}
+
+.esm-file-upload {
+    padding: 1em;
+}
+
+.esm-progress-bar {
+    height: 2em;
+    width: 5em;
+}
+
+h2 {
+     color: #c50909;
+ }
+
+.esm-divider{
+    border-top-color: #c50909;
+}
+
+.esm_file_upload {
+    border: 1px solid #e5e5e5;
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-top: 3em;
+}
+
+input[type=file]::file-selector-button {
+    background-color: #fff;
+    color: #000;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: .5s;
+}
+
+input[type=file]::file-selector-button:hover {
+    background-color: #eee;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+}
+
+.esm-btn {
+    text-align: center;
+    padding-top: 2em;
+}
+
+.esm-upload-btn {
+    height: 3em;
+    min-width: 15em;
+    border-radius: 2em;
+    color: #ffff;
+    border-color: #c50909;
+    font-size: 16px;
+    background-color: #c50909;
+    border-bottom: #ffff;
+    border-right: #ffff;
+}
