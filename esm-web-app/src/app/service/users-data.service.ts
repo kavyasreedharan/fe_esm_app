@@ -8,20 +8,13 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class FileUploadService {
+export class UsersDataService {
 
   constructor(private http: HttpClient, private appConstants: AppConstants) { }
 
-  upload(userDataFile: File): Observable<any> {
-    const formData = new FormData();
-    formData.append("file", userDataFile, userDataFile.name);
-    return this.http.post(this.appConstants.HOST_URL + this.appConstants.USER_DATA_FILE_UPLOAD_ENDPOINT, formData)
-      .pipe(catchError(this.handleError)
-      );
-  }
-
-  getUsersData(): Observable<any> {
-    return this.http.get(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT)
+  getUsersData(minSalary: number, maxSalary: number, offset: number, limit: number, sort: string): Observable<any> {
+    return this.http.get(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT
+      + '?minSalary=' + minSalary + '&maxSalary=' + maxSalary + '&offset=' + offset + '&limit=' + limit + '&sort=' + sort)
       .pipe(catchError(this.handleError)
       );
   }
@@ -36,6 +29,6 @@ export class FileUploadService {
       // The backend returned an unsuccessful response code.
       console.error('Backend returned code ${error.status}, body was: ', error.error);
     }
-    return throwError(() =>error.error.message);
+    return throwError(() => error.error.message);
   }
 }

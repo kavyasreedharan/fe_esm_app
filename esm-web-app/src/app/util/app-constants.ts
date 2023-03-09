@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class AppConstants {
-    public USER_DATA_FILE_UPLOAD_URL = "/users/upload";
+    public USER_DATA_FILE_UPLOAD_ENDPOINT = "/users/upload";
+    public GET_USERS_DATA_ENDPOINT = "/users";
     public HOST_URL = "http://localhost:8080";
 }

@@ -17,6 +17,8 @@ import { UserFileUploadComponent } from './user-file-upload/user-file-upload.com
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpClientModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

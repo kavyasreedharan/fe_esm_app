@@ -9,9 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserFileUploadComponent implements OnInit {
 
-  // Variable to store shortLink from api response
-  loading: boolean = false; // Flag variable
-  file: any; // Variable to store file
+  loading: boolean = false; 
+  file: any; 
 
   ngOnInit(): void {
     console.log('Loading UserFileUploadComponent')
