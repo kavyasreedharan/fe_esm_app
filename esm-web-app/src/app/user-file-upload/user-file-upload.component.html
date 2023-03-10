@@ -10,11 +10,11 @@
         <div class="esm_file_upload">
             <input type="file" id="fileUpload" (change)="onFileSelect($event)">
           </div>
-         <div class="esm-btn"><button (click)="onFileUpload()" class="esm-upload-btn">Upload Data</button> </div> 
+         <div class="esm-btn"><button (click)="onFileUpload()" class="esm-upload-btn" [disabled]="isDisabled">Upload Data</button> </div> 
     </span>
       
     <span class="esm-progress-bar" *ngIf="loading">
-        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" value="70"></mat-progress-bar>
     </span>
     
 </div>

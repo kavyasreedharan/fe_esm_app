@@ -1,12 +1,14 @@
 table {
     border-collapse: collapse;
     width: 100%;
-}
 
-th {
-    // background-color: #c50909;
-    color: #c50909;
-    width: 150px;
+    th {
+        background-color: #c50909;
+        color: #ffff;
+        width: 150px;
+        border: 2px solid #c50909;
+    }
+    
 }
 
 td {
@@ -33,6 +35,39 @@ tr {
         padding-left: 5em;
         padding-right: 5em;
     }
+
+    .esm-filter {
+        padding-left: 5em;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .esm-filter-label {
+        padding: 1em;
+        font-style: italic;
+    }
+
+    mat-slider {
+        width: 85%;
+    }
+
+    .esm-slider-div {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .esm-header {
+        margin-left: 40px;
+        color: #c50909;
+    
+        h2 {
+            margin-left: 40px;
+        }
+    }
+
+    .esm-paginator {
+        padding-right: 5em;
+    }
 }
 
 @media (max-width:415px) {
@@ -42,21 +77,45 @@ tr {
         margin-left: 10px;
         margin-right: 10px;
     }
+
+    .esm-filter {
+        padding-left: 1em;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-right: 10px;
+    }
+
+    .esm-filter-label {
+        padding: 5px;
+        font-style: italic;
+    }
+
+    mat-slider {
+        width: 95%;
+    }
+    
+    .esm-slider-div {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .esm-header {
+        color: #c50909;
+    
+        h2 {
+            margin-left: 1em;
+        }
+    }
+
+    .esm-paginator {
+        padding-right: 1em;
+    }
 }
 
 .esm-tbl-header {
     text-align: left;
     width: 32px;
     // border: 1px solid #c50909;
-}
-
-.esm-header {
-    margin-left: 40px;
-    color: #c50909;
-
-    h2 {
-        margin-left: 40px;
-    }
 }
 
 td.mat-cell {
@@ -82,8 +141,4 @@ td.mat-cell:last-child {
 .esm-usr-img {
     height: 35px;
     width: 35px;
-}
-
-mat-slider {
-    width: 300px;
 }

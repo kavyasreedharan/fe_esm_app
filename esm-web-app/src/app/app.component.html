@@ -1,19 +1,17 @@
-<mat-sidenav-container class="esm-container">
-    <mat-sidenav class="esm-sidenav" #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
-        (closed)="events.push('close!')">
+<mat-sidenav-container class="esm-container" [hasBackdrop]="sidenav.opened">
+    <mat-sidenav class="esm-sidenav" #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
         <img class="esm-user-img" src="assets/empty_user.png" />
         <p class="esm-username">Admin</p>
-        <mat-nav-list class="esm-list">
-            <mat-list-item *ngFor="let item of listItems">
-                <mat-icon matListIcon>{{item.icon}}</mat-icon>
-                <a [routerLink]="item.link" routerLinkActive="active" matLine>{{item.linkTitle}}</a>
-            </mat-list-item>
-        </mat-nav-list>
+
+        <button mat-button class="esm-sidenav esm-sidenav-border menu-button" [routerLink]="item.link" *ngFor="let item of listItems">
+            <mat-icon>{{item.icon}}</mat-icon>
+            <span>{{item.linkTitle}}</span>
+        </button>
     </mat-sidenav>
 
     <mat-sidenav-content>
         <div class="esm-header">
-            <a (click)="sidenav.toggle()"><mat-icon class="material-icons-round esm-menu">menu_open</mat-icon></a>
+            <a #hasBackdrop (click)="sidenav.toggle()"><mat-icon class="material-icons-round esm-menu">menu_open</mat-icon></a>
             <p class="esm-app-name" *ngIf="!opened"> Employee Salary Management</p>
             <p class="esm-app-name1" *ngIf="opened"> Employee Salary Management</p>
         </div>

@@ -62,3 +62,7 @@ input[type=file]::file-selector-button:hover {
     border-bottom: #ffff;
     border-right: #ffff;
 }
+
+button:disabled{
+    opacity: 0.3;
+  }

@@ -10,7 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserFileUploadComponent implements OnInit {
 
   loading: boolean = false; 
-  file: any; 
+  file: File; 
+  isDisabled:boolean = true;
 
   ngOnInit(): void {
     console.log('Loading UserFileUploadComponent')
@@ -20,11 +21,15 @@ export class UserFileUploadComponent implements OnInit {
 
   onFileSelect(event: any) {
     this.file = event.target.files[0];
+    console.log(this.file);
+    if(this.file && this.file.size > 0) {
+      this.isDisabled = false;
+    }
   }
+  
 
   onFileUpload() {
     this.loading = !this.loading;
-    console.log(this.file);
     this.fileUploadService.upload(this.file).subscribe(
       (response: any) => {
         console.log('response => ' + JSON.stringify(response));
