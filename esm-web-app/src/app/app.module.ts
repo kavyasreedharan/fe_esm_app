@@ -19,6 +19,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
