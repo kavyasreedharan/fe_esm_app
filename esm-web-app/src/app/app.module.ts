@@ -22,12 +22,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    UserFileUploadComponent
+    UserFileUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +51,7 @@ import {MatSliderModule} from '@angular/material/slider';
     MatCardModule,
     MatGridListModule,
     MatSliderModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

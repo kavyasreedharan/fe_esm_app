@@ -12,7 +12,7 @@ export class AppComponent {
 
   listItems = [
     { linkTitle: 'Dashboard', link: '/dashboard', icon: 'dashboard' },
-    { linkTitle: 'User Data Upload', link: '/usersDataUpload', icon: 'upload' },
+    { linkTitle: 'Employee Data Upload', link: '/usersDataUpload', icon: 'upload' },
   ];
 
   handleClick(selectedItem: any) {

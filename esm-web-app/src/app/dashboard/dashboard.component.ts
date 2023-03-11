@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsersDataService } from '../service/users-data.service';
 
@@ -22,16 +22,15 @@ export class DashboardComponent implements OnInit {
   minSalary: number = 0;
   maxSalary: number = 4000;
   offset: number = 0;
-  sortType: string = '%2Dname';
+  sortType: string = '%2Bname';
   displayedColumns: string[] = ['img', 'id', 'login', 'name', 'salary'];
-  dataSource: MatTableDataSource<UserData>;
+  dataSource: MatTableDataSource<UserData> = new MatTableDataSource<UserData>([]);;
 
   length = 50;
-  pageSize = 10;
+  pageSize = 5;
   pageIndex = 0;
   pageSizeOptions = [5, 10, 25];
   pageEvent: PageEvent;
-
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -50,39 +49,25 @@ export class DashboardComponent implements OnInit {
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
 
-    if(this.length > 0) {
+    if (this.length > 0) {
       this.getAllEmployeeDetails();
     } else {
-        this.loading = false;
-        this.userMessage.open('Employee records are not available', '', {
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-          duration: 5000,
-        });
+      this.loading = false;
+      this.userMessage.open('Employee records are not available', '', {
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        duration: 5000,
+      });
     }
-    
-  }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-    }
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   sortData(sort: any) {
-    console.log('sort => ' + sort)
-     //this.dataSource.sort = sort; 
+    if (sort) {
+      this.sortType = sort.direction == 'asc' ? '%2B' + sort.active : '%2D' + sort.active
+      this.getAllEmployeeDetails();
     }
-
+  }
 
   minValue(event: any) {
     console.log('minValue = ' + event.target.value)
@@ -101,6 +86,7 @@ export class DashboardComponent implements OnInit {
       (response: any) => {
         this.dataSource = new MatTableDataSource(response.results);
         this.length = response.totalElements;
+        this.dataSource.sort = this.sort;
       },
       (error: any) => {
         console.log('error => ' + JSON.stringify(error));

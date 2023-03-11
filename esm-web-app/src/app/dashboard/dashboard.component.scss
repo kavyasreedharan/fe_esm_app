@@ -26,6 +26,11 @@ tr {
     border-right: hidden;
     width: 32px;
     height: 5em;
+    text-align: center;
+}
+
+.esm-td:first-child {
+    text-align: center;
 }
 
 @media (min-width:600px) {
@@ -65,6 +70,11 @@ tr {
         }
     }
 
+    .esm-img-th:first-child {
+        max-width: 30px;
+        text-align: center;
+    }
+
     .esm-paginator {
         padding-right: 5em;
     }
@@ -75,7 +85,7 @@ tr {
         border-collapse: separate;
         border-spacing: 0 15px;
         margin-left: 10px;
-        margin-right: 10px;
+        padding-right: 10px;
     }
 
     .esm-filter {
@@ -101,10 +111,15 @@ tr {
 
     .esm-header {
         color: #c50909;
-    
+        
         h2 {
             margin-left: 1em;
         }
+    }
+
+    .esm-img-th:first-child {
+        max-width: 30px;
+        text-align: center;
     }
 
     .esm-paginator {
@@ -116,6 +131,10 @@ tr {
     text-align: left;
     width: 32px;
     // border: 1px solid #c50909;
+
+    ::ng-deep .mat-sort-header-arrow {
+        color: #fff;
+    }
 }
 
 td.mat-cell {

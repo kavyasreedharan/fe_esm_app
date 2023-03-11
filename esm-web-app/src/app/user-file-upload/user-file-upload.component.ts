@@ -27,13 +27,14 @@ export class UserFileUploadComponent implements OnInit {
     }
   }
   
-
   onFileUpload() {
     this.loading = !this.loading;
+    this.isDisabled = true;
     this.fileUploadService.upload(this.file).subscribe(
       (response: any) => {
         console.log('response => ' + JSON.stringify(response));
         this.loading = false;
+        this.isDisabled = false;
         this.userMessage.open(response.message, '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
@@ -43,6 +44,7 @@ export class UserFileUploadComponent implements OnInit {
       (error: any) => {
         console.log('error => ' + JSON.stringify(error));
         this.loading = false;
+        this.isDisabled = false;
         this.userMessage.open(error, '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
