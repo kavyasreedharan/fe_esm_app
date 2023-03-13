@@ -1,16 +1,12 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';
+import { Employee } from '../model/employee.model';
 import { UsersDataService } from '../service/users-data.service';
-
-export interface UserData {
-  id: string;
-  login: string;
-  name: string;
-  salary: number;
-}
 
 @Component({
   selector: 'app-dashboard',
@@ -23,9 +19,10 @@ export class DashboardComponent implements OnInit {
   maxSalary: number = 4000;
   offset: number = 0;
   sortType: string = '%2Bname';
-  displayedColumns: string[] = ['img', 'id', 'login', 'name', 'salary'];
-  dataSource: MatTableDataSource<UserData> = new MatTableDataSource<UserData>([]);;
-
+  displayedColumns: string[] = ['img', 'id', 'login', 'name', 'salary', 'actions'];
+  dataSource: MatTableDataSource<Employee> = new MatTableDataSource<Employee>([]);;
+  isEmpDataUpdated: boolean = false;
+  empDataToUpdate: Employee = new Employee();
   length = 50;
   pageSize = 5;
   pageIndex = 0;
@@ -35,12 +32,28 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private usersDataService: UsersDataService, private userMessage: MatSnackBar) {
+  constructor(private usersDataService: UsersDataService,
+    private userMessage: MatSnackBar,
+    public dialog: MatDialog) {
     this.getAllEmployeeDetails();
   }
 
   ngOnInit(): void {
     console.log('Dashboard loaded');
+
+    this.usersDataService.isEmpDataUpdated.subscribe((updatedData) => {
+      console.log('updatedData =>  ' + JSON.stringify(updatedData));
+      if(this.isEmpDataUpdated) {
+        this.dataSource.data.filter(value=>{
+          if(value.id == updatedData.id){
+            value.login = updatedData.login;
+            value.name = updatedData.name;
+            value.salary = updatedData.salary;
+          }
+          return true;
+        });
+      }
+    });
   }
 
   handlePageEvent(e: PageEvent) {
@@ -59,7 +72,6 @@ export class DashboardComponent implements OnInit {
         duration: 5000,
       });
     }
-
   }
 
   sortData(sort: any) {
@@ -100,6 +112,41 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  editEmployeeDetails(event: any) {
+    console.log('edit => ' + JSON.stringify(event))
+    this.empDataToUpdate.id = event.id;
+    this.empDataToUpdate.login = event.login;
+    this.empDataToUpdate.name = event.name;
+    this.empDataToUpdate.salary = event.salary
+    this.usersDataService.setSelectedEmpData(this.empDataToUpdate);
+    this.usersDataService.setShowEditStatus(true);
+    this.usersDataService.setShowDeleteStatus(false);
+    const dialogRef = this.dialog.open(EmployeeDetailsComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshTable();
+    });
+  }
+
+  deleteEmployeeDetails(event: any) {
+    console.log('delete => ' + JSON.stringify(event))
+    this.usersDataService.setSelectedEmpData(event);
+    this.usersDataService.setShowEditStatus(false);
+    this.usersDataService.setShowDeleteStatus(true);
+    const dialogRef = this.dialog.open(EmployeeDetailsComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshTable();
+    });
+
+    // const index = this.dataSource.indexOf(row, 0);
+    // if (index > -1) {
+    //   this.dataSource.splice(index, 1);
+    // }
+    // this.table.renderRows();
+  }
+
+  private refreshTable() {
+    this.paginator._changePageSize(this.paginator.pageSize);
+  }
 }
 
 

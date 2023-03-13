@@ -8,7 +8,7 @@ table {
         width: 150px;
         border: 2px solid #c50909;
     }
-    
+
 }
 
 td {
@@ -64,7 +64,7 @@ tr {
     .esm-header {
         margin-left: 40px;
         color: #c50909;
-    
+
         h2 {
             margin-left: 40px;
         }
@@ -72,6 +72,11 @@ tr {
 
     .esm-img-th:first-child {
         max-width: 30px;
+        text-align: center;
+    }
+
+    .esm-img-th:last-child {
+        max-width: 100px;
         text-align: center;
     }
 
@@ -103,7 +108,7 @@ tr {
     mat-slider {
         width: 95%;
     }
-    
+
     .esm-slider-div {
         padding-left: 1em;
         padding-right: 1em;
@@ -111,19 +116,30 @@ tr {
 
     .esm-header {
         color: #c50909;
-        
+
         h2 {
             margin-left: 1em;
         }
     }
 
     .esm-img-th:first-child {
-        max-width: 30px;
+        max-width: 40px;
+        text-align: center;
+    }
+
+    .esm-img-th:last-child {
         text-align: center;
     }
 
     .esm-paginator {
         padding-right: 1em;
+    }
+
+}
+
+.esm-td-img {
+    .mat-icon {
+        padding-right: 10px;
     }
 }
 
@@ -160,4 +176,12 @@ td.mat-cell:last-child {
 .esm-usr-img {
     height: 35px;
     width: 35px;
+}
+
+.esm-img-btn:hover {
+    cursor: pointer;
+}
+
+.esm-img-btn:focus {
+    cursor: pointer;
 }

@@ -3,7 +3,7 @@
         <img class="esm-user-img" src="assets/empty_user.png" />
         <p class="esm-username">Admin</p>
 
-        <button mat-button class="esm-sidenav esm-sidenav-border menu-button" [routerLink]="item.link" *ngFor="let item of listItems">
+        <button mat-button class="esm-sidenav esm-sidenav-border menu-button" (click)="sidenav.close()" [routerLink]="item.link" *ngFor="let item of listItems">
             <mat-icon>{{item.icon}}</mat-icon>
             <span>{{item.linkTitle}}</span>
         </button>

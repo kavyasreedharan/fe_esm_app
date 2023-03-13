@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-divider class="esm-divider"></mat-divider>
+
+<mat-dialog-content class="mat-typography" *ngIf="showEdit">
+  <form class="esm-form" [formGroup]="employeeForm" (ngSubmit)="onSaveEmployeeDetails()">
+        <mat-label>Employee ID : {{empId}}</mat-label>
+    <div class="esm-fields">
+      <mat-form-field class="esm-full-width">
+        <mat-label>Employee Login</mat-label>
+        <input type="text" matInput [formControl]="loginFormControl" [errorStateMatcher]="matcher" placeholder="johndoe">
+        <mat-error *ngIf="loginFormControl.hasError('login') && !loginFormControl.hasError('required')">
+          Please enter a login name
+        </mat-error>
+        <mat-error *ngIf="loginFormControl.hasError('required')">
+          Login is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="esm-fields">
+      <mat-form-field class="esm-full-width">
+        <mat-label>Employee Name</mat-label>
+        <input type="text" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher" placeholder="John Doe">
+        <mat-error *ngIf="nameFormControl.hasError('name') && !nameFormControl.hasError('required')">
+          Please enter employee full name
+        </mat-error>
+        <mat-error *ngIf="nameFormControl.hasError('required')">
+          Full name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="esm-fields">
+      <mat-form-field class="esm-full-width">
+        <mat-label>Employee Salary</mat-label>
+        <input type="number" matInput [formControl]="salaryFormControl" [errorStateMatcher]="matcher" placeholder="3500.00">
+        <mat-error *ngIf="salaryFormControl.hasError('salary') && !salaryFormControl.hasError('required')">
+          Please enter employee salary
+        </mat-error>
+        <mat-error *ngIf="salaryFormControl.hasError('required')">
+          Salary is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- <div class="form-group">
+      <span class="esm-btn"><button class="esm-save-btn">Save</button> </span> 
+      <span class="esm-btn"><button class="esm-save-btn">Cancel</button> </span> 
+    </div> -->
+
+    <div mat-dialog-actions>
+      <button mat-button class="esm-save-btn" [disabled]="!employeeForm.valid">Save</button>
+      <button mat-button class="esm-save-btn" (click)="close()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-content class="mat-typography" *ngIf="showDelete">
+    <h3>Do you want to delete employee record of employee ID {{empId}}?</h3>
+
+    <div mat-dialog-actions class="esm-btn-div">
+      <button mat-button class="esm-save-btn" (click)="close()">Cancel</button>
+      <button mat-button class="esm-save-btn" (click)="onDeleteEmployeeDetails()">Confirm</button>
+    </div>
+
+</mat-dialog-content>

@@ -16,10 +16,10 @@
 }
 
 h2 {
-     color: #c50909;
- }
+    color: #c50909;
+}
 
-.esm-divider{
+.esm-divider {
     border-top-color: #c50909;
 }
 
@@ -61,8 +61,20 @@ input[type=file]::file-selector-button:hover {
     background-color: #c50909;
     border-bottom: #ffff;
     border-right: #ffff;
+    outline: none;
+    cursor: pointer;
 }
 
-button:disabled{
+button:disabled {
     opacity: 0.3;
-  }
+}
+
+.esm-upload-btn:hover {
+    outline: none;
+    cursor: pointer;
+}
+
+.esm-upload-btn:focus {
+    outline: none;
+    cursor: pointer;
+}

@@ -20,12 +20,6 @@ export class FileUploadService {
       );
   }
 
-  getUsersData(): Observable<any> {
-    return this.http.get(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT)
-      .pipe(catchError(this.handleError)
-      );
-  }
-
   private handleError(error: HttpErrorResponse) {
     console.log("error -> " + JSON.stringify(error));
     if (error.status === 0) {

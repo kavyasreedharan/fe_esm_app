@@ -23,12 +23,16 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSortModule} from '@angular/material/sort';
+import {MatDialogModule} from '@angular/material/dialog';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { UsersDataService } from './service/users-data.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     UserFileUploadComponent,
+    EmployeeDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,9 +55,10 @@ import {MatSortModule} from '@angular/material/sort';
     MatCardModule,
     MatGridListModule,
     MatSliderModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [UsersDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
