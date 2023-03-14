@@ -1,0 +1,45 @@
+<span class="esm-header">
+  <h2>{{ title}}</h2>
+  <mat-divider class="esm-divider"></mat-divider>
+</span>
+
+<form class="esm-form" [formGroup]="employeeForm" (ngSubmit)="searchEmployeeById()">
+  <div class="esm-fields">
+    <mat-form-field class="esm-full-width">
+      <mat-label>Search with Employee ID</mat-label>
+      <input type="text" matInput [formControl]="idFormControl" [errorStateMatcher]="matcher" placeholder="e0001">
+      <mat-error *ngIf="idFormControl.hasError('login') && !idFormControl.hasError('required')">
+        Please enter Employee ID
+      </mat-error>
+      <mat-error *ngIf="idFormControl.hasError('required')">
+        ID is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button mat-button class="esm-save-btn" [disabled]="!employeeForm.valid">Search Employee</button>
+  </div>
+</form>
+
+<div>
+ <table class="esm-table">
+  <tr class="mat-cell">
+    <th class="esm-img-th">ID</th>
+    <th class="esm-img-th">Login</th>
+    <th class="esm-img-th">Name</th>
+    <th class="esm-img-th">Salary</th>
+    <th class="esm-img-th">Actions</th>
+  </tr>
+  <tr class="mat-cell">
+    <td>{{empData.id}}</td>
+    <td>{{empData.login}}</td>
+    <td>{{empData.name}}</td>
+    <td>{{empData.salary}}</td>
+    <td>
+      <mat-icon class="esm-img-btn" (click) = "editEmployeeDetails()" *ngIf="submitted">edit</mat-icon>
+      <mat-icon class="esm-img-btn" (click) = "deleteEmployeeDetails()" *ngIf="submitted">delete</mat-icon>
+    </td>
+  </tr>
+  </table>
+</div>

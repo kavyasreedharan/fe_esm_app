@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   offset: number = 0;
   sortType: string = '%2Bname';
   displayedColumns: string[] = ['img', 'id', 'login', 'name', 'salary', 'actions'];
-  dataSource: MatTableDataSource<Employee> = new MatTableDataSource<Employee>([]);;
+  dataSource: MatTableDataSource<Employee> = new MatTableDataSource<Employee>([]);
   isEmpDataUpdated: boolean = false;
   empDataToUpdate: Employee = new Employee();
   length = 50;
@@ -136,12 +136,6 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.refreshTable();
     });
-
-    // const index = this.dataSource.indexOf(row, 0);
-    // if (index > -1) {
-    //   this.dataSource.splice(index, 1);
-    // }
-    // this.table.renderRows();
   }
 
   private refreshTable() {

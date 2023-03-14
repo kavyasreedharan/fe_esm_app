@@ -1,9 +1,3 @@
-// :host {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-// }
-
 .esm-fields {
     padding: 10px;
     min-width: 7em;
@@ -15,7 +9,7 @@
 
 @media (max-width:415px) {
     .esm-fields {
-        padding: 0;
+        padding: 1em;
         min-width: 3em;
     
         .mat-form-field {
@@ -25,7 +19,7 @@
 
     .esm-form {
         text-align: center;
-        width: 17em;
+        padding-top: 3em;
     }
 
     .esm-save-btn {
@@ -50,12 +44,20 @@
     .esm-btn-div {
         padding-left: 1em;
     }
+
+    .esm-header {
+        color: #c50909;
+
+        h2 {
+            margin-left: 1em;
+        }
+    }
     
 }
 
 @media (min-width:600px) {
     .esm-fields {
-        padding: 0;
+        padding: 1em;
         min-width: 5em;
     
         .mat-form-field {
@@ -65,7 +67,7 @@
 
     .esm-form {
         text-align: center;
-        width: 20em;
+        padding-top: 3em;
     }
 
     .esm-save-btn {
@@ -89,6 +91,15 @@
     .esm-btn-div {
         padding-left: 5em;
     }
+
+    .esm-header {
+        margin-left: 40px;
+        color: #c50909;
+
+        h2 {
+            margin-left: 40px;
+        }
+    }
     
 }
 
@@ -109,4 +120,12 @@
 .esm-save-btn:focus{
     outline: none;
     cursor: pointer;
+}
+
+.esm-title {
+    padding-left: 3em;
+}
+
+.esm-divider{
+    border-top-color: #c50909;
 }

@@ -32,9 +32,24 @@ export class UsersDataService {
       );
   }
 
+  searchUserData(empId: string): Observable<any> {
+    return this.http.get(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT + '/' + empId)
+      .pipe(catchError(this.handleError)
+      );
+  }
+
   updateUserData(empData: Employee): Observable<any> {
     console.log('UserData => ' + empData)
     return this.http.patch(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT + "/" + empData.id,
+      JSON.stringify(empData),
+      { headers: new HttpHeaders().set('Content-Type', 'application/json') })
+      .pipe(catchError(this.handleError)
+      );
+  }
+
+  saveUserData(empData: Employee): Observable<any> {
+    console.log('UserData => ' + empData)
+    return this.http.post(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT + "/" + empData.id,
       JSON.stringify(empData),
       { headers: new HttpHeaders().set('Content-Type', 'application/json') })
       .pipe(catchError(this.handleError)

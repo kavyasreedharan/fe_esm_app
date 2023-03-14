@@ -1,9 +1,22 @@
-<h2 mat-dialog-title>{{ title }}</h2>
-<mat-divider class="esm-divider"></mat-divider>
+<span class="esm-header">
+  <h2>{{ title }}</h2>
+  <mat-divider class="esm-divider"></mat-divider>
+</span>
 
-<mat-dialog-content class="mat-typography" *ngIf="showEdit">
+<mat-dialog-content class="mat-typography">
   <form class="esm-form" [formGroup]="employeeForm" (ngSubmit)="onSaveEmployeeDetails()">
-        <mat-label>Employee ID : {{empId}}</mat-label>
+    <div class="esm-fields">
+      <mat-form-field class="esm-full-width">
+        <mat-label>Employee ID</mat-label>
+        <input type="text" matInput [formControl]="idFormControl" [errorStateMatcher]="matcher" placeholder="e0001">
+        <mat-error *ngIf="idFormControl.hasError('login') && !idFormControl.hasError('required')">
+          Please enter ID
+        </mat-error>
+        <mat-error *ngIf="idFormControl.hasError('required')">
+          ID is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
     <div class="esm-fields">
       <mat-form-field class="esm-full-width">
         <mat-label>Employee Login</mat-label>
@@ -43,18 +56,7 @@
 
     <div mat-dialog-actions>
       <button mat-button class="esm-save-btn" [disabled]="!employeeForm.valid">Save</button>
-      <button mat-button class="esm-save-btn" (click)="close()" tabindex="-1">Cancel</button>
     </div>
   </form>
-
-</mat-dialog-content>
-
-<mat-dialog-content class="mat-typography" *ngIf="showDelete">
-    <h3>Do you want to delete employee record of employee ID {{empId}}?</h3>
-
-    <div mat-dialog-actions class="esm-btn-div">
-      <button mat-button class="esm-save-btn" (click)="close()">Cancel</button>
-      <button mat-button class="esm-save-btn" (click)="onDeleteEmployeeDetails()">Confirm</button>
-    </div>
 
 </mat-dialog-content>
