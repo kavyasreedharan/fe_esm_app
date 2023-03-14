@@ -43,9 +43,9 @@ export class DashboardComponent implements OnInit {
 
     this.usersDataService.isEmpDataUpdated.subscribe((updatedData) => {
       console.log('updatedData =>  ' + JSON.stringify(updatedData));
-      if(this.isEmpDataUpdated) {
-        this.dataSource.data.filter(value=>{
-          if(value.id == updatedData.id){
+      if (this.isEmpDataUpdated) {
+        this.dataSource.data.filter(value => {
+          if (value.id == updatedData.id) {
             value.login = updatedData.login;
             value.name = updatedData.name;
             value.salary = updatedData.salary;
@@ -94,13 +94,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllEmployeeDetails() {
-    this.usersDataService.getUsersData(this.minSalary, this.maxSalary, this.pageIndex, this.pageSize, this.sortType).subscribe(
-      (response: any) => {
+    this.usersDataService.getUsersData(this.minSalary, this.maxSalary, this.pageIndex, this.pageSize, this.sortType).subscribe({
+      next: (response: any) => {
         this.dataSource = new MatTableDataSource(response.results);
         this.length = response.totalElements;
         this.dataSource.sort = this.sort;
       },
-      (error: any) => {
+      error: (error: any) => {
         console.log('error => ' + JSON.stringify(error));
         this.loading = false;
         this.userMessage.open(error, '', {
@@ -109,7 +109,8 @@ export class DashboardComponent implements OnInit {
           duration: 5000,
         });
         this.dataSource = new MatTableDataSource();
-      });
+      }
+    });
   }
 
   editEmployeeDetails(event: any) {

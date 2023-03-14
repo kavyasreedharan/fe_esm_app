@@ -108,8 +108,8 @@ export class EmployeeDetailsComponent implements OnInit {
 
   onDeleteEmployeeDetails() {
     this.usersDataService.setShowDeleteStatus(false);
-    this.usersDataService.deleteUserData(this.empId).subscribe(
-      (response: any) => {
+    this.usersDataService.deleteUserData(this.empId).subscribe({
+      next: (response: any) => {
         console.log("delete employee response => " + JSON.stringify(response));
         if(response.responseCode == 200) {
           this.usersDataService.setEmpDataUpdateStatus(this.empData);
@@ -117,14 +117,14 @@ export class EmployeeDetailsComponent implements OnInit {
           this.usersDataService.setShowEditStatus(false);
         }
       },
-      (error: any) => {
+      error: (error:any) => {
         console.log('error => ' + JSON.stringify(error));
         this.userMessage.open(error, '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
           duration: 5000,
         });
-      });
+  }});
     this.close();
 
   }

@@ -3,3 +3,9 @@
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.red-snackbar {
+    --mdc-snackbar-container-color: #020000be;
+    color: #c50909;
+    margin-top: 5em;
+}

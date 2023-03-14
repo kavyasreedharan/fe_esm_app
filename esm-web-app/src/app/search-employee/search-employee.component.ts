@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Optional } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';
 import { Employee } from '../model/employee.model';
 import { UsersDataService } from '../service/users-data.service';
@@ -74,8 +73,8 @@ export class SearchEmployeeComponent implements OnInit {
       this.submitted = true;
       this.empData = this.employeeForm.value;
       console.log('valss== ' + JSON.stringify(this.empData))
-      this.usersDataService.searchUserData(this.empData.id).subscribe(
-        (response: any) => {
+      this.usersDataService.searchUserData(this.empData.id).subscribe({
+        next: (response: any) => {
           console.log("save employee response => " + JSON.stringify(response));
           if (response.responseCode == 200) {
             this.empData.login = response.empDataRecord.login;
@@ -88,7 +87,7 @@ export class SearchEmployeeComponent implements OnInit {
             });
           }
         },
-        (error: any) => {
+        error: (error: any) => {
           this.empData.id = '';
           console.log('error => ' + JSON.stringify(error));
           this.userMessage.open(error, '', {
@@ -96,7 +95,7 @@ export class SearchEmployeeComponent implements OnInit {
             verticalPosition: 'bottom',
             duration: 5000,
           });
-        });
+        }});
     }
   }
 

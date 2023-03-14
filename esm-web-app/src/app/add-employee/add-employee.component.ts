@@ -25,8 +25,8 @@ export class AddEmployeeComponent implements OnInit {
   employeeForm: FormGroup;
   empData: Employee = new Employee();
 
-  idFormControl= new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.nullValidator]);
-  loginFormControl= new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25), Validators.nullValidator]);
+  idFormControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(25), Validators.nullValidator]);
+  loginFormControl = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25), Validators.nullValidator]);
   nameFormControl = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(50), Validators.nullValidator]);
   salaryFormControl = new FormControl('', [Validators.required, Validators.minLength(0), Validators.maxLength(7), Validators.nullValidator]);
 
@@ -41,7 +41,7 @@ export class AddEmployeeComponent implements OnInit {
       login: this.loginFormControl,
       name: this.nameFormControl,
       salary: this.salaryFormControl,
-  });
+    });
   }
 
   matcher = new MyErrorStateMatcher();
@@ -59,17 +59,17 @@ export class AddEmployeeComponent implements OnInit {
     } else {
       this.empData = this.employeeForm.value;
       console.log('valss== ' + JSON.stringify(this.empData))
-      this.usersDataService.saveUserData(this.empData).subscribe(
-        (response: any) => {
+      this.usersDataService.saveUserData(this.empData).subscribe({
+        next: (response: any) => {
           console.log("save employee response => " + JSON.stringify(response));
           this.submitted = false;
           this.employeeForm.reset();
           Object.keys(this.employeeForm.controls).forEach((key) => {
             const control = this.employeeForm.controls[key];
             control.setErrors(null);
-        });
-          if(response.responseCode == 200) {
-            
+          });
+          if (response.responseCode == 200) {
+
             this.userMessage.open(response.message, '', {
               horizontalPosition: 'center',
               verticalPosition: 'bottom',
@@ -77,14 +77,15 @@ export class AddEmployeeComponent implements OnInit {
             });
           }
         },
-        (error: any) => {
+        error: (error: any) => {
           console.log('error => ' + JSON.stringify(error));
           this.userMessage.open(error, '', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             duration: 5000,
           });
-        });
+        }
+      });
     }
   }
 
