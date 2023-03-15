@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Employee } from '../model/employee.model';
 
@@ -31,7 +31,6 @@ describe('DashboardComponent', () => {
       declarations: [ DashboardComponent ],
       imports: [ HttpClientModule, MatSnackBarModule, BrowserAnimationsModule, ReactiveFormsModule, MatDialogModule, MatDividerModule, MatFormFieldModule,
          MatInputModule, MatSliderModule, MatPaginatorModule, MatTableModule, ],
-        //  providers: [{provide: MatSnackBar, useValue: mockSnackbarMock},
           providers: [{provide: MatSnackBar},
       ]
     })
@@ -71,7 +70,6 @@ describe('DashboardComponent', () => {
 
   // it('should test the data in table tag', (done) => {
   //   let dataSource = new MatTableDataSource(employees);
-  //   console.log('da data :: ' + dataSource.data)
   //   expect(component.dataSource).toEqual(dataSource);
   
   //   fixture.detectChanges();

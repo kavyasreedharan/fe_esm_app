@@ -12,8 +12,7 @@
     <mat-sidenav-content>
         <div class="esm-header">
             <a #hasBackdrop (click)="sidenav.toggle()"><mat-icon class="material-icons-round esm-menu">menu_open</mat-icon></a>
-            <p class="esm-app-name" *ngIf="!opened"> Employee Salary Management</p>
-            <p class="esm-app-name1" *ngIf="opened"> Employee Salary Management</p>
+            <span> Employee Salary Management</span>
         </div>
         <router-outlet></router-outlet>
     </mat-sidenav-content>

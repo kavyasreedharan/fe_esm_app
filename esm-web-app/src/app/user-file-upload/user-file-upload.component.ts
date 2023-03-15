@@ -15,14 +15,12 @@ export class UserFileUploadComponent implements OnInit {
   isDisabled: boolean = true;
 
   ngOnInit(): void {
-    console.log('Loading UserFileUploadComponent')
   }
 
   constructor(private fileUploadService: FileUploadService, private userMessage: MatSnackBar) { }
 
   onFileSelect(event: any) {
     this.file = event.target.files[0];
-    console.log(this.file);
     if (this.file && this.file.size > 0) {
       this.isDisabled = false;
     }
@@ -37,7 +35,6 @@ export class UserFileUploadComponent implements OnInit {
     this.fileUploadService.upload(this.file).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response => ' + JSON.stringify(response));
           this.loading = false;
           this.isDisabled = false;
           this.userMessage.open('Uploaded employees data has been saved successfully', '', {
@@ -49,7 +46,6 @@ export class UserFileUploadComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        console.log(error);
         this.loading = false;
         this.isDisabled = false;
         this.userMessage.open(error, '', {

@@ -7,7 +7,7 @@
     }
 }
 
-@media (max-width:415px) {
+@media (max-width:500px) {
     .esm-fields {
         padding: 1em;
         min-width: 3em;
@@ -20,6 +20,7 @@
     .esm-form {
         text-align: center;
         padding-top: 3em;
+        padding-bottom: 3em;
     }
 
     .esm-save-btn {
@@ -55,7 +56,7 @@
     
 }
 
-@media (min-width:600px) {
+@media (min-width:501px) {
     .esm-fields {
         padding: 1em;
         min-width: 5em;
@@ -68,6 +69,7 @@
     .esm-form {
         text-align: center;
         padding-top: 3em;
+        padding-bottom: 3em;
     }
 
     .esm-save-btn {
@@ -100,7 +102,6 @@
             margin-left: 40px;
         }
     }
-    
 }
 
 .esm-btn {
@@ -129,3 +130,7 @@
 .esm-divider{
     border-top-color: #c50909;
 }
+
+.mat-mdc-dialog-actions {
+    justify-content: center !important;
+  }

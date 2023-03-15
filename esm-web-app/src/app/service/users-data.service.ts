@@ -22,6 +22,12 @@ export class UsersDataService {
   private showDeleteStatus = new BehaviorSubject<boolean>(false);
   showDeleteStatusValue = this.showDeleteStatus.asObservable();
 
+  private showSearchDeleteStatus = new BehaviorSubject<boolean>(false);
+  getSearchDeleteStatusValue = this.showSearchDeleteStatus.asObservable();
+
+  private showSearchUpdatestatus = new BehaviorSubject<boolean>(false);
+  getSearchUpdateStatusValue = this.showSearchUpdatestatus.asObservable();
+
 
   constructor(private http: HttpClient, private appConstants: AppConstants) { }
 
@@ -39,7 +45,6 @@ export class UsersDataService {
   }
 
   updateUserData(empData: Employee): Observable<any> {
-    console.log('UserData => ' + empData)
     return this.http.patch(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT + "/" + empData.id,
       JSON.stringify(empData),
       { headers: new HttpHeaders().set('Content-Type', 'application/json') })
@@ -48,7 +53,6 @@ export class UsersDataService {
   }
 
   saveUserData(empData: Employee): Observable<any> {
-    console.log('UserData => ' + empData)
     return this.http.post(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT + "/" + empData.id,
       JSON.stringify(empData),
       { headers: new HttpHeaders().set('Content-Type', 'application/json') })
@@ -57,22 +61,15 @@ export class UsersDataService {
   }
 
   deleteUserData(empId: String): Observable<any> {
-    console.log('UserData => ' + empId)
     return this.http.delete(this.appConstants.HOST_URL + this.appConstants.GET_USERS_DATA_ENDPOINT + "/" + empId)
       .pipe(catchError(this.handleError)
       );
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log("error -> " + JSON.stringify(error));
     if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred: ', error.error);
       error.error.message = 'Unable to connect with server. Please try again later.'
-    } else {
-      // The backend returned an unsuccessful response code.
-      console.error('Backend returned code ${error.status}, body was: ', error.error);
-    }
+    } 
     return throwError(() => error.error.message);
   }
 
@@ -90,5 +87,13 @@ export class UsersDataService {
 
   setShowDeleteStatus(status: boolean) {
     this.showDeleteStatus.next(status);
+  }
+
+  setSearchDeleteStatus(status: boolean) {
+    this.showSearchDeleteStatus.next(status);
+  }
+
+  setSearchUpdateStatus(status: boolean) {
+    this.showSearchUpdatestatus.next(status);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Optional } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -29,8 +29,8 @@ export class EmployeeDetailsComponent implements OnInit {
   showDelete: boolean = false;
 
 
-  loginFormControl= new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25), Validators.nullValidator]);
-  nameFormControl = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(50), Validators.nullValidator]);
+  loginFormControl = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(25), Validators.nullValidator]);
+  nameFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.nullValidator]);
   salaryFormControl = new FormControl('', [Validators.required, Validators.minLength(0), Validators.maxLength(7), Validators.nullValidator]);
 
   constructor(private formBuilder: FormBuilder, private userMessage: MatSnackBar, private usersDataService: UsersDataService,
@@ -38,42 +38,38 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('EmployeeDetailsComponent loaded');
-
     this.employeeForm = this.formBuilder.group({
       login: this.loginFormControl,
       name: this.nameFormControl,
       salary: this.salaryFormControl,
-  });
+    });
 
-  this.usersDataService.empDataSelected.subscribe((value) => {
-    console.log('value =>  ' + JSON.stringify(value));
-    this.empId = value.id;
-    this.loginFormControl.setValue(value.login);
-    this.nameFormControl.setValue(value.name);
-    this.salaryFormControl.setValue(value.salary);
-  });
+    this.usersDataService.empDataSelected.subscribe((value) => {
+      this.empId = value.id;
+      this.loginFormControl.setValue(value.login);
+      this.nameFormControl.setValue(value.name);
+      this.salaryFormControl.setValue(value.salary);
+    });
 
-  this.usersDataService.showEditStatusValue.subscribe((value) => {
-    this.showEdit = value;
-    if(this.showEdit) {
-      this.title = 'Edit Employee Details'
-    }
-  });
+    this.usersDataService.showEditStatusValue.subscribe((value) => {
+      this.showEdit = value;
+      if (this.showEdit) {
+        this.title = 'Edit Employee Details'
+      }
+    });
 
-  this.usersDataService.showDeleteStatusValue.subscribe((value) => {
-    this.showDelete = value;
-    if(this.showDelete) {
-      this.title = 'Delete Employee Details'
-    }
-  });
+    this.usersDataService.showDeleteStatusValue.subscribe((value) => {
+      this.showDelete = value;
+      if (this.showDelete) {
+        this.title = 'Delete Employee Details'
+      }
+    });
 
   }
 
   matcher = new MyErrorStateMatcher();
 
   onSaveEmployeeDetails() {
-    console.log('employeeForm => ' + JSON.stringify(this.employeeForm.getRawValue()))
     if (this.employeeForm.invalid) {
       this.submitted = false;
       this.userMessage.open('Please provide valid employee details to proceed', '', {
@@ -85,53 +81,57 @@ export class EmployeeDetailsComponent implements OnInit {
     } else {
       this.empData = this.employeeForm.value;
       this.empData.id = this.empId;
-      console.log('valss== ' + JSON.stringify(this.empData))
-      this.usersDataService.updateUserData(this.empData).subscribe(
-        (response: any) => {
-          console.log("update employee response => " + JSON.stringify(response));
-          if(response.responseCode == 200) {
+      this.usersDataService.updateUserData(this.empData).subscribe({
+        next: (response: any) => {
+          if (response.responseCode == 200) {
+            this.userMessage.open(response.message, '', {
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+              duration: 5000,
+            });
             this.usersDataService.setEmpDataUpdateStatus(this.empData);
-            this.close();
             this.usersDataService.setShowDeleteStatus(false);
+            this.close();
           }
         },
-        (error: any) => {
-          console.log('error => ' + JSON.stringify(error));
+        error: (error: any) => {
           this.userMessage.open(error, '', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             duration: 5000,
           });
-        });
+        }
+      });
     }
   }
 
   onDeleteEmployeeDetails() {
-    this.usersDataService.setShowDeleteStatus(false);
     this.usersDataService.deleteUserData(this.empId).subscribe({
       next: (response: any) => {
-        console.log("delete employee response => " + JSON.stringify(response));
-        if(response.responseCode == 200) {
-          this.usersDataService.setEmpDataUpdateStatus(this.empData);
+        if (response.responseCode == 200) {
+          this.usersDataService.setShowDeleteStatus(true);
+          this.usersDataService.setSearchDeleteStatus(true);
           this.close();
           this.usersDataService.setShowEditStatus(false);
         }
       },
-      error: (error:any) => {
-        console.log('error => ' + JSON.stringify(error));
+      error: (error: any) => {
+        this.usersDataService.setShowDeleteStatus(false);
+        this.usersDataService.setSearchDeleteStatus(false);
         this.userMessage.open(error, '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
           duration: 5000,
         });
-  }});
+      }
+    });
     this.close();
-
   }
+
   close(): void {
+    this.usersDataService.setShowDeleteStatus(false);
     this.dialogRef.close();
   }
-
 
 }
 

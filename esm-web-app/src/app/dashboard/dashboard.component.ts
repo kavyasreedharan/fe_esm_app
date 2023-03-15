@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import {  MatTableDataSource } from '@angular/material/table';
 import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';
 import { Employee } from '../model/employee.model';
 import { UsersDataService } from '../service/users-data.service';
@@ -16,9 +16,9 @@ import { UsersDataService } from '../service/users-data.service';
 export class DashboardComponent implements OnInit {
   loading: boolean = false;
   minSalary: number = 0;
-  maxSalary: number = 4000;
+  maxSalary: number = 50000;
   offset: number = 0;
-  sortType: string = '%2Bname';
+  sortType: string = '%2Bid';
   displayedColumns: string[] = ['img', 'id', 'login', 'name', 'salary', 'actions'];
   dataSource: MatTableDataSource<Employee> = new MatTableDataSource<Employee>([]);
   isEmpDataUpdated: boolean = false;
@@ -39,10 +39,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Dashboard loaded');
-
     this.usersDataService.isEmpDataUpdated.subscribe((updatedData) => {
-      console.log('updatedData =>  ' + JSON.stringify(updatedData));
       if (this.isEmpDataUpdated) {
         this.dataSource.data.filter(value => {
           if (value.id == updatedData.id) {
@@ -82,13 +79,11 @@ export class DashboardComponent implements OnInit {
   }
 
   minValue(event: any) {
-    console.log('minValue = ' + event.target.value)
     this.minSalary = event.target.value;
     this.getAllEmployeeDetails();
   }
 
   maxValue(event: any) {
-    console.log('maxValue = ' + event.target.value)
     this.maxSalary = event.target.value;
     this.getAllEmployeeDetails();
   }
@@ -101,7 +96,6 @@ export class DashboardComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error: (error: any) => {
-        console.log('error => ' + JSON.stringify(error));
         this.loading = false;
         this.userMessage.open(error, '', {
           horizontalPosition: 'center',
@@ -114,7 +108,6 @@ export class DashboardComponent implements OnInit {
   }
 
   editEmployeeDetails(event: any) {
-    console.log('edit => ' + JSON.stringify(event))
     this.empDataToUpdate.id = event.id;
     this.empDataToUpdate.login = event.login;
     this.empDataToUpdate.name = event.name;
@@ -129,7 +122,6 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteEmployeeDetails(event: any) {
-    console.log('delete => ' + JSON.stringify(event))
     this.usersDataService.setSelectedEmpData(event);
     this.usersDataService.setShowEditStatus(false);
     this.usersDataService.setShowDeleteStatus(true);

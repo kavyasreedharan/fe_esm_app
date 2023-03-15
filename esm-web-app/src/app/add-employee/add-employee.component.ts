@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, Optional } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Employee } from '../model/employee.model';
 import { UsersDataService } from '../service/users-data.service';
@@ -34,8 +33,6 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('AddEmployeeComponent loaded');
-
     this.employeeForm = this.formBuilder.group({
       id: this.idFormControl,
       login: this.loginFormControl,
@@ -47,7 +44,6 @@ export class AddEmployeeComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   onSaveEmployeeDetails() {
-    console.log('employeeForm => ' + JSON.stringify(this.employeeForm.getRawValue()))
     if (this.employeeForm.invalid) {
       this.submitted = false;
       this.userMessage.open('Please provide valid employee details to proceed', '', {
@@ -58,10 +54,8 @@ export class AddEmployeeComponent implements OnInit {
       return;
     } else {
       this.empData = this.employeeForm.value;
-      console.log('valss== ' + JSON.stringify(this.empData))
       this.usersDataService.saveUserData(this.empData).subscribe({
         next: (response: any) => {
-          console.log("save employee response => " + JSON.stringify(response));
           this.submitted = false;
           this.employeeForm.reset();
           Object.keys(this.employeeForm.controls).forEach((key) => {
@@ -78,7 +72,6 @@ export class AddEmployeeComponent implements OnInit {
           }
         },
         error: (error: any) => {
-          console.log('error => ' + JSON.stringify(error));
           this.userMessage.open(error, '', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',

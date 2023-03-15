@@ -1,5 +1,5 @@
 <span class="esm-header">
-  <h2>{{ title}}</h2>
+  <h2>{{ title }}</h2>
   <mat-divider class="esm-divider"></mat-divider>
 </span>
 
@@ -22,24 +22,24 @@
   </div>
 </form>
 
-<div>
- <table class="esm-table">
-  <tr class="mat-cell">
-    <th class="esm-img-th">ID</th>
-    <th class="esm-img-th">Login</th>
-    <th class="esm-img-th">Name</th>
-    <th class="esm-img-th">Salary</th>
-    <th class="esm-img-th">Actions</th>
-  </tr>
-  <tr class="mat-cell">
-    <td>{{empData.id}}</td>
-    <td>{{empData.login}}</td>
-    <td>{{empData.name}}</td>
-    <td>{{empData.salary}}</td>
-    <td>
-      <mat-icon class="esm-img-btn" (click) = "editEmployeeDetails()" *ngIf="submitted">edit</mat-icon>
-      <mat-icon class="esm-img-btn" (click) = "deleteEmployeeDetails()" *ngIf="submitted">delete</mat-icon>
-    </td>
-  </tr>
+<section class="esm-container mat-elevation-z8" tabindex="0">
+  <table class="esm-table">
+    <tr class="mat-cell">
+      <th class="esm-img-th">ID</th>
+      <th class="esm-img-th">Login</th>
+      <th class="esm-img-th">Name</th>
+      <th class="esm-img-th">Salary</th>
+      <th class="esm-img-th">Actions</th>
+    </tr>
+    <tr class="mat-cell">
+      <td>{{empData.id}}</td>
+      <td>{{empData.login}}</td>
+      <td>{{empData.name}}</td>
+      <td>{{empData.salary}}</td>
+      <td>
+        <mat-icon class="esm-img-btn" (click)="editEmployeeDetails()" *ngIf="submitted">edit</mat-icon>
+        <mat-icon class="esm-img-btn" (click)="deleteEmployeeDetails()" *ngIf="submitted">delete</mat-icon>
+      </td>
+    </tr>
   </table>
-</div>
+</section>

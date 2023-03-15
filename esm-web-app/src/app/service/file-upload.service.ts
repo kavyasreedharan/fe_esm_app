@@ -21,15 +21,9 @@ export class FileUploadService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log("error -> " + JSON.stringify(error));
     if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred: ', error.error);
       error.error.message = 'Unable to connect with server. Please try again later.'
-    } else {
-      // The backend returned an unsuccessful response code.
-      console.error('Backend returned code ${error.status}, body was: ', error.error);
-    }
+    } 
     return throwError(() =>error.error.message);
   }
 }
