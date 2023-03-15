@@ -1,18 +1,15 @@
 # fe_esm_app
 Frontend source code of MVP Employee Salary Management Application
 
-#Employee Salary Management (ESM) Backend Application
-#-------------------------------------------------------
-
 ## About the application
 ESM web application is a frontend Angular application developed in order to help the HR department to manage the employees' salaries. This application runs along with the backend Java Spring Boot application (be_esm_app) to carry out REST APIs calls and and performing CRUD operations. Using this application we can perform below functionalities.
-	1) Add new employee data
-	2) Update employee data
-	3) Delete employee data
-	4) View employee data
-	5) Search for employee data using employee id
-	6) Display all employee records in dashboard. Filter using salary. Sort by ID, Login, Name or Salary fields in ascending or descending order
-	7) Upload employees' data using CSV file
+1) Add new employee data
+2) Update employee data
+3) Delete employee data
+4) View employee data
+5) Search for employee data using employee id
+6) Display all employee records in dashboard. Filter using salary. Sort by ID, Login, Name or Salary fields in ascending or descending order
+7) Upload employees' data using CSV file
 
 ## Tecnologies
 Angular
